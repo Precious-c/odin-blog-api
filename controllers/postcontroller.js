@@ -14,19 +14,13 @@ module.exports = {
   },
   newPost: async (req, res) => {
     try {
-      console.log("in new post");
-      // Upload image to cloudinary
-      // const result = await cloudinary.uploader.upload(req.file.path);
-      console.log(req.file);
       const post = new Post({
         postTitle: req.body.postTitle,
         postContent: req.body.postContent,
-        // postImage: result.secure_url,
-        // cloudinaryId: result.public_id,
+        postImage: req.file.path,
       });
       console.log("post: ", post);
       const save = await post.save();
-      console.log("save: ", save);
       return res.status(200).json({ success: true, post: post });
     } catch (err) {
       console.log(err);
