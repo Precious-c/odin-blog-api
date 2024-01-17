@@ -88,8 +88,8 @@ module.exports = {
       return res
         .status(200)
         .json({ success: true, noOfPublishedPosts: publishedPosts.length, posts: publishedPosts });
-    } catch {
-      res.status(400).status(err);
+    } catch (err) {
+      res.status(400).json({ success: false, message: err.message });
     }
   },
   publishPost: async (req, res) => {
